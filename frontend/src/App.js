@@ -1,11 +1,11 @@
 import React from "react";
-import Map from "./Map";
+import MapComponent from "./Map";
 
 function App() {
   return (
     <div>
       <h1>Location Tagging App</h1>
-      <Map />
+      <MapComponent />
     </div>
   );
 }
