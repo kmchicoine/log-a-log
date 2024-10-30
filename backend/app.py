@@ -5,12 +5,14 @@ app = Flask(__name__, static_folder='/frontend/build', static_url_path='')
 CORS(app)
 
 class Location:
-    def __init__(self, id, lat, lng, title=None, description=None):
+    def __init__(self, id, lat, lng, title=None, description=None, rating=None):
         self.id = id
         self.lat = lat
         self.lng = lng
         self.title = title
         self.description = description
+        self.rating = rating
+
 
     #serialize to JSON
     def to_dict(self):
@@ -20,10 +22,11 @@ class Location:
             'lng': self.lng,
             'title': self.title,
             'description': self.description,
+            'rating': self.rating,
         }
     
 #In-memory store for tagged locations
-DEFAULT_LOCATION = Location(id=0, lat=44.0582, lng=-121.3153, title='init',description='init')
+DEFAULT_LOCATION = Location(id=0, lat=44.0582, lng=-121.3153, title='init',description='init', rating=5)
 locations = [DEFAULT_LOCATION]
 
 #@app.route('/')
@@ -55,7 +58,8 @@ def add_location():
         lat=data['lat'],
         lng=data['lng'],
         title=title,
-        description=description
+        description=description,
+        rating=data['rating'],
     )
 
     locations.append(new_location)
